@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace SimpleBlog
 {
-    class FilterConfig
+    public class FilterConfig
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
