@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.title = "Post";
+    // view are loaded first before the layout.
+}
+
+
+
+    <h1>Post Index</h1>
+   
+    <p>
+    <a href = "@Url.RouteUrl("login")"> Click here </a> to login in!
+     </p>
+
+    <p>
+        @Html.RouteLink("Click here", "login") to login in!
+    </p>
+
+
+@section Scripts
+{
+    <script>
+        alert("HI");
+    </script>
+    
+
+}
