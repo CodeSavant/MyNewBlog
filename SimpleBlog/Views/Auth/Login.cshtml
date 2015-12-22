@@ -1,7 +1,31 @@
-﻿@{
+﻿@model SimpleBlog.ViewModels.AuthLogin
+
+@{
     ViewBag.title = "login";
     // view are loaded first before the layout are 
+    
+    // strongly typed view , for intellisence. 
 }
 
-<p>THIS IS THE LOGIN VIEW</p>
+
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+    <div>
+        @Html.LabelFor(x => x.Username)
+        @Html.EditorFor(x => x.Username)
+    </div>
+
+    <div>
+        @Html.LabelFor(x => x.Password)
+        @Html.EditorFor(x => x.Password)
+    </div>
+    
+    <div>
+        <input type="submit" value="login" />
+    </div>
+}
+
+
 
