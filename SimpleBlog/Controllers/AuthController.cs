@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace SimpleBlog.Controllers
 {
@@ -17,23 +18,29 @@ namespace SimpleBlog.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(AuthLogin form)
+        public ActionResult Login(AuthLogin form, string ReturnUrl)
         {
             if (!ModelState.IsValid)
             {
                 // pass back invalid model to do again.
                 return View(form);
             }
-            if ( form.Username != "Rainbow dash")
-            {
-                ModelState.AddModelError("Username", "Username or password isn't 20% cooler");
-                return View(form);
-            }
+            
+            FormsAuthentication.SetAuthCookie(form.Username, true);
 
-            else
-            {
-                return Content("This! Form is Valid");
-            }
+
+            if (!string.IsNullOrWhiteSpace(ReturnUrl))
+                return Redirect(ReturnUrl);
+
+            return RedirectToRoute("home");
+            
+        }
+
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+
+            return RedirectToRoute("home");
         }
     }
 }
