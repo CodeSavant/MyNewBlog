@@ -1,2 +1,11 @@
 ﻿
+@model SimpleBlog.Areas.Admin.ViewModels.UsersIndex
+
 <h1>USERS</h1>
+
+<ul>
+    @foreach (var user in Model.Users)
+    {
+        <li>@user.Username</li>
+    }
+</ul>
