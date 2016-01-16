@@ -10,6 +10,12 @@ namespace SimpleBlog.Models
 {
     public class User
     {
+        private const int WorkFactor = 13;
+        // this method is used to prevent timing attacks.
+        public static void FakeHash()
+        {
+            BCrypt.Net.BCrypt.HashPassword("", WorkFactor);
+        }
 
         // All members must be virtual because NHibernate needs it for the proxies.
         public virtual int Id { get; set; }
@@ -19,7 +25,14 @@ namespace SimpleBlog.Models
 
         public virtual void SetPassword(string password)
         {
-            PasswordHash = "ignore me.";
+            PasswordHash = BCrypt.Net.BCrypt.HashPassword(password, WorkFactor);
+            //PasswordHash = "IGNORE ME";
+
+        }
+
+        public virtual bool CheckPassword(string password)
+        {
+            return BCrypt.Net.BCrypt.Verify(password, PasswordHash);
         }
     }
 
